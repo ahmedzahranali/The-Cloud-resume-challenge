@@ -25,7 +25,7 @@ jobs:
         uses: aws-actions/configure-aws-credentials@v4
         with:
           role-to-assume: arn:aws:iam::862264091652:role/GitHubActionsWorkflowRole
-          aws-region: us-east-1
+          aws-region: us-east-2
 
       # --- INFRASTRUCTURE (Terraform) ---
       - name: Setup Terraform
