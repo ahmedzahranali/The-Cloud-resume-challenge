@@ -1,14 +1,32 @@
-/* 1. Terminal Variables */
+/* 1. Terminal Variables (Default) */
 :root {
-    --bg-color: #0d0d0d;      /* Deep Black */
-    --text-color: #00ff41;    /* Matrix Green */
-    --prompt-color: #ffb000;  /* Amber for prompts */
-    --accent-color: #008f11;  /* Darker Green */
+    --bg-color: #0d0d0d;      
+    --text-color: #00ff41;    
+    --prompt-color: #ffb000;  
+    --accent-color: #008f11;  
     --border-color: #333333;
     --font-mono: 'Courier New', Courier, 'Lucida Sans Typewriter', monospace;
+    --page-bg: #1a1a1a;
+    --counter-bg: #001a00;
+    --btn-bg: #333333;
+    --btn-text: #00ff41;
 }
 
-/* 2. Global Reset */
+/* 2. Cloud Theme Variables (Overrides the root when active) */
+body.cloud-theme {
+    --bg-color: #ffffff;      
+    --text-color: #333333;    
+    --prompt-color: #0056b3;  
+    --accent-color: #007bff;  
+    --border-color: #dddddd;
+    --font-mono: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    --page-bg: #f4f7f6;
+    --counter-bg: #e9ecef;
+    --btn-bg: #0056b3;
+    --btn-text: #ffffff;
+}
+
+/* 3. Global Reset & Body */
 * {
     margin: 0;
     padding: 0;
@@ -16,14 +34,33 @@
 }
 
 body {
-    background-color: #1a1a1a; /* Slight gray background to pop the terminal */
+    background-color: var(--page-bg);
     color: var(--text-color);
     font-family: var(--font-mono);
     line-height: 1.5;
     padding: 20px;
+    transition: all 0.4s ease; 
 }
 
-/* 3. The Terminal Window Container */
+/* 4. Theme Toggle Button */
+.theme-btn {
+    float: right;
+    background-color: var(--btn-bg);
+    color: var(--btn-text);
+    padding: 8px 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: inherit;
+    font-weight: bold;
+    transition: all 0.4s ease;
+}
+
+.theme-btn:hover {
+    filter: brightness(1.2);
+}
+
+/* 5. The Terminal Window Container */
 main, header {
     max-width: 900px;
     margin: 0 auto;
@@ -32,21 +69,22 @@ main, header {
     border: 1px solid var(--border-color);
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
     position: relative;
+    transition: all 0.4s ease;
 }
 
 header {
     border-bottom: none;
     padding-bottom: 0;
-    text-align: left; /* Terminal style is left-aligned */
+    text-align: left; 
 }
 
-/* 4. Terminal Header (Login Style) */
+/* 6. Terminal Header (Login Style) */
 h1 {
     font-size: 1.8rem;
     margin-bottom: 5px;
 }
 
-h1::before {
+body:not(.cloud-theme) h1::before {
     content: "root@zahran:~# ";
     color: var(--prompt-color);
 }
@@ -62,7 +100,7 @@ h1::before {
     text-decoration: underline;
 }
 
-/* 5. Section Headers as Commands */
+/* 7. Section Headers as Commands */
 h2 {
     font-size: 1.1rem;
     margin-top: 30px;
@@ -71,19 +109,32 @@ h2 {
     text-transform: lowercase;
 }
 
-h2::before {
+body:not(.cloud-theme) h2::before {
     content: "guest@zahran:~$ ./view_";
 }
 
-/* 6. Content Blocks */
+/* 8. Content Blocks */
 p, li {
     font-size: 0.95rem;
     margin-bottom: 10px;
 }
 
 ul {
-    list-style-type: "> "; /* Terminal style bullets */
+    list-style-type: none; 
     padding-left: 20px;
+}
+
+body:not(.cloud-theme) ul li::before {
+    content: "> ";
+    color: var(--accent-color);
+    font-weight: bold;
+    display: inline-block;
+    width: 1em;
+    margin-left: -1em;
+}
+
+body.cloud-theme ul {
+    list-style-type: disc;
 }
 
 .skills-grid {
@@ -97,11 +148,11 @@ ul {
 
 .skill-group h3 {
     font-size: 0.9rem;
-    color: #fff;
+    color: var(--text-color);
     margin-bottom: 5px;
 }
 
-/* 7. Experience Items */
+/* 9. Experience Items */
 .exp-item {
     margin-bottom: 25px;
     border-left: 2px solid var(--accent-color);
@@ -112,31 +163,31 @@ ul {
     display: flex;
     justify-content: space-between;
     font-weight: bold;
-    color: #fff;
+    color: var(--text-color);
     margin-bottom: 10px;
 }
 
-/* 8. Visitor Counter (System Log Style) */
+/* 10. Visitor Counter */
 .counter-box {
     border: 1px solid var(--accent-color);
     padding: 10px;
     margin: 20px 0;
     display: block;
-    background: #001a00;
+    background: var(--counter-bg);
 }
 
-#counter {
-    text-decoration: blink; /* Retro vibe */
+body:not(.cloud-theme) #counter {
+    text-decoration: blink; 
 }
 
-/* 9. Signature with Cursor Animation */
+/* 11. Signature with Cursor Animation */
 .signature {
     margin-top: 40px;
     font-size: 1.2rem;
     color: var(--prompt-color);
 }
 
-.signature::after {
+body:not(.cloud-theme) .signature::after {
     content: "_";
     animation: blink 1s step-end infinite;
 }
@@ -146,7 +197,7 @@ ul {
     50% { opacity: 0; }
 }
 
-/* 10. Print Optimization */
+/* 12. Print Optimization */
 @media print {
     body { background: white; color: black; padding: 0; }
     main, header { 
@@ -159,4 +210,5 @@ ul {
     h1, h2, h3, a { color: black !important; }
     h1::before, h2::before { content: ""; }
     .signature::after { display: none; }
+    .theme-btn { display: none; }
 }
