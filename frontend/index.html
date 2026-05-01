@@ -4,22 +4,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ahmed Zahran | Cloud DevOps Engineer</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <header>
-    <button id="theme-toggle" class="theme-btn">Switch to Cloud Theme ☁️</button>
+    <button id="theme-toggle" class="theme-btn no-print"><i class="fas fa-cloud"></i> Switch to Cloud Theme</button>
     <h1>Ahmed Zahran Ali</h1>
+    
+    <!-- Contact Line (Handles both Screen and Print views) -->
     <p class="contact-line">
-        Hadayek Elmaadi, Cairo, Egypt | 
-        <a href="mailto:ahmedzahran851@gmail.com">ahmedzahran851@gmail.com</a> | 
-        01123790314 | 
-        <a href="https://www.linkedin.com/in/ahmed-zahran-b0a054393" target="_blank">LinkedIn</a> | 
-        <a href="https://github.com/ahmedzahranali" target="_blank">GitHub</a>
+        <i class="fas fa-map-marker-alt"></i> Hadayek Elmaadi, Cairo, Egypt | 
+        <i class="fas fa-phone"></i> 01123790314 
+        <span class="print-only">
+            <br>
+            <i class="fas fa-envelope"></i> ahmedzahran851@gmail.com | 
+            <i class="fab fa-linkedin"></i> linkedin.com/in/ahmed-zahran-b0a054393 | 
+            <i class="fab fa-github"></i> github.com/ahmedzahranali
+        </span>
     </p>
-    <div class="counter-box">
-        <p>Visitor Count: <span id="counter">Loading...</span></p>
+    
+    <!-- Screen-Only Clickable Icon Links -->
+    <div class="social-icons no-print">
+        <a href="mailto:ahmedzahran851@gmail.com" title="Email"><i class="fas fa-envelope"></i></a>
+        <a href="https://www.linkedin.com/in/ahmed-zahran-b0a054393" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+        <a href="https://github.com/ahmedzahranali" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+    </div>
+
+    <div class="counter-box no-print">
+        <p><i class="fas fa-chart-line"></i> Visitor Count: <span id="counter">Loading...</span></p>
     </div>
 </header>
 
@@ -33,23 +47,23 @@
         <h2>Technical Skills</h2>
         <div class="skills-grid">
             <div class="skill-group">
-                <h3>Cloud & Architecture</h3>
+                <h3><i class="fas fa-server"></i> Cloud & Architecture</h3>
                 <p>AWS (S3, Lambda, CloudFront, IAM, CloudWatch, SNS), Serverless Architecture</p>
             </div>
             <div class="skill-group">
-                <h3>Automation & CI/CD</h3>
+                <h3><i class="fas fa-code-branch"></i> Automation & CI/CD</h3>
                 <p>Terraform, GitHub Actions, Ansible, Python, Shell Scripting, Git</p>
             </div>
             <div class="skill-group">
-                <h3>OS & Security</h3>
+                <h3><i class="fab fa-linux"></i> OS & Security</h3>
                 <p>Linux Administration (Red Hat Admin I/II, SELinux, LVM), Zero-Trust Security (OIDC)</p>
             </div>
             <div class="skill-group">
-                <h3>Containerization</h3>
+                <h3><i class="fas fa-cubes"></i> Containerization</h3>
                 <p>Kubernetes, Docker, Red Hat OpenShift</p>
             </div>
             <div class="skill-group">
-                <h3>Networking & Languages</h3>
+                <h3><i class="fas fa-network-wired"></i> Networking & Languages</h3>
                 <p>VLANs, SNMP, Cisco, English (Fluent / C1), Arabic (Native)</p>
             </div>
         </div>
@@ -135,14 +149,14 @@
         Faculty of Computers and Artificial Intelligence, Beni-suef, Egypt | Graduation: 2022</p>
     </section>
 
-    <div class="signature">
+    <div class="signature no-print">
         <p>logout</p>
         <p>Ahmed Zahran</p>
     </div>
 </main>
 
-<footer>
-    <p>Powered by AWS (S3, CloudFront, Lambda, DynamoDB, OIDC CI/CD)</p>
+<footer class="no-print">
+    <p><i class="fab fa-aws"></i> Powered by AWS (S3, CloudFront, Lambda, DynamoDB, OIDC CI/CD)</p>
 </footer>
 
 <script src="main.js"></script>

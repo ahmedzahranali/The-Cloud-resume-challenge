@@ -24,27 +24,33 @@ async function updateCounter() {
 
 updateCounter();
 
-// --- 2. Theme Toggle Logic ---
+// --- 2. Theme Toggle Logic with Icons ---
 const toggleBtn = document.getElementById('theme-toggle');
 const body = document.body;
 
-// Check if the user previously saved a theme preference in localStorage
+function updateButtonUI() {
+    if (body.classList.contains('cloud-theme')) {
+        toggleBtn.innerHTML = '<i class="fas fa-terminal"></i> Switch to Terminal Theme';
+    } else {
+        toggleBtn.innerHTML = '<i class="fas fa-cloud"></i> Switch to Cloud Theme';
+    }
+}
+
 const currentTheme = localStorage.getItem('theme');
 if (currentTheme === 'cloud') {
     body.classList.add('cloud-theme');
-    toggleBtn.textContent = 'Switch to Terminal Theme 💻';
 }
 
-// Listen for clicks on the button
+updateButtonUI();
+
 toggleBtn.addEventListener('click', () => {
     body.classList.toggle('cloud-theme');
     
-    // Update the button text and save the preference
+    updateButtonUI();
+    
     if (body.classList.contains('cloud-theme')) {
-        toggleBtn.textContent = 'Switch to Terminal Theme 💻';
         localStorage.setItem('theme', 'cloud');
     } else {
-        toggleBtn.textContent = 'Switch to Cloud Theme ☁️';
         localStorage.setItem('theme', 'terminal');
     }
 });
