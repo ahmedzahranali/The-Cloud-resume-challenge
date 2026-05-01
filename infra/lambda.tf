@@ -1,11 +1,11 @@
 resource "aws_lambda_function" "visitor_counter_lambda" {
   provider      = aws.us_east_1
-  function_name = "cloud-resume-challenge" 
+  function_name = "cloud-resume-challenge"
   role          = aws_iam_role.lambda_exec_role.arn
-  handler       = "lambda_function.lambda_handler" 
+  handler       = "lambda_function.lambda_handler"
   runtime       = "python3.12"
 
-  filename      = "function.zip" 
+  filename = "function.zip"
 
   lifecycle {
     ignore_changes = [
