@@ -19,12 +19,10 @@ terraform {
 # Default provider (Ohio)
 provider "aws" {
   region  = "us-east-2"
-  profile = "sso-admin"
 }
 
 # Secondary provider (N. Virginia) 
 provider "aws" {
   alias   = "us_east_1"
   region  = "us-east-1"
-  profile = "sso-admin"
 }
