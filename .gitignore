@@ -20,3 +20,7 @@ backend/venv/
 .pytest_cache/
 
 node_modules/
+test-results/
+playwright-report/
+blob-report/
+.last-run.json
