@@ -18,3 +18,5 @@ Thumbs.db
 
 backend/venv/
 .pytest_cache/
+
+node_modules/
