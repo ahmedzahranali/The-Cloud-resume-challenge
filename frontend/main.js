@@ -1,56 +1,28 @@
-// --- 1. Visitor Counter Logic ---
-const counter = document.querySelector("#counter");
+// --- 3. Scroll Reveal Animation Logic ---
 
-async function updateCounter() {
-    const apiUrl = "https://uizk0ln0mj.execute-api.us-east-1.amazonaws.com/prod/visit";
+// Set up the Intersection Observer
+const observerOptions = {
+    root: null,          // Use the viewport as the root
+    rootMargin: '0px',
+    threshold: 0.15      // Trigger when 15% of the section is visible
+};
 
-    try {
-        let response = await fetch(apiUrl, {
-            method: 'POST'
-        });
-        
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
+const observer = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            // Add the visible class to trigger the CSS animation
+            entry.target.classList.add('is-visible');
+            
+            // Unobserve the element so it only animates once
+            observer.unobserve(entry.target);
         }
+    });
+}, observerOptions);
 
-        let data = await response.json();
-        counter.innerHTML = data.count;
-        
-    } catch (error) {
-        console.error("Could not fetch the visitor counter:", error);
-        counter.innerHTML = "Offline";
-    }
-}
-
-updateCounter();
-
-// --- 2. Theme Toggle Logic with Icons ---
-const toggleBtn = document.getElementById('theme-toggle');
-const body = document.body;
-
-function updateButtonUI() {
-    if (body.classList.contains('cloud-theme')) {
-        toggleBtn.innerHTML = '<i class="fas fa-terminal"></i> Switch to Terminal Theme';
-    } else {
-        toggleBtn.innerHTML = '<i class="fas fa-cloud"></i> Switch to Cloud Theme';
-    }
-}
-
-const currentTheme = localStorage.getItem('theme');
-if (currentTheme === 'cloud') {
-    body.classList.add('cloud-theme');
-}
-
-updateButtonUI();
-
-toggleBtn.addEventListener('click', () => {
-    body.classList.toggle('cloud-theme');
-    
-    updateButtonUI();
-    
-    if (body.classList.contains('cloud-theme')) {
-        localStorage.setItem('theme', 'cloud');
-    } else {
-        localStorage.setItem('theme', 'terminal');
-    }
+// Grab all sections with the fade-in class and start observing them
+document.addEventListener('DOMContentLoaded', () => {
+    const sections = document.querySelectorAll('.fade-in-section');
+    sections.forEach(section => {
+        observer.observe(section);
+    });
 });
