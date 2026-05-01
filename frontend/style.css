@@ -1,4 +1,386 @@
 /* =========================================
+   1. MODERN TERMINAL VARIABLES (Default)
+   ========================================= */
+:root {
+    --page-bg: #1a1b26;           /* Deep soft slate blue */
+    --bg-color: #24283b;          /* Slightly lighter container */
+    --text-color: #c0caf5;        /* Soft lavender-white for less eye strain */
+    --prompt-color: #7aa2f7;      /* Pastel blue for headers/prompts */
+    --accent-color: #9ece6a;      /* Soft pastel green for list accents */
+    --border-color: #414868;      /* Muted borders */
+    --font-mono: 'Fira Code', 'Courier New', Courier, monospace;
+    --counter-bg: #16161e;
+    --btn-bg: #3d59a1;
+    --btn-text: #c0caf5;
+    
+    --glass-blur: blur(0px);
+    --shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    --float-transform: translateY(0);
+}
+
+/* =========================================
+   2. FLOATING CLOUD VARIABLES (Toggled)
+   ========================================= */
+body.cloud-theme {
+    background: linear-gradient(-45deg, #ff990033, #6b5b9533, #ffffff, #e6f7ff);
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
+
+    --page-bg: transparent; 
+    --bg-color: rgba(255, 255, 255, 0.65); 
+    --text-color: #333333;    
+    --prompt-color: #ff9900;  
+    --accent-color: #6b5b95;  
+    --border-color: rgba(255, 255, 255, 0.4);
+    --font-mono: 'Inter', 'Segoe UI', Tahoma, sans-serif;
+    --counter-bg: rgba(255, 255, 255, 0.6);
+    --btn-bg: #ff9900;
+    --btn-text: #ffffff;
+    
+    --glass-blur: blur(12px);
+    --shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+    --float-transform: translateY(-5px);
+}
+
+@keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* =========================================
+   3. GLOBAL RESET & BODY
+   ========================================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--page-bg);
+    color: var(--text-color);
+    font-family: var(--font-mono);
+    line-height: 1.6;
+    padding: 20px;
+    transition: background-color 0.5s ease, color 0.5s ease; 
+}
+
+/* Base Print Utility Class (Hidden on screen) */
+.print-only {
+    display: none;
+}
+
+/* =========================================
+   4. THEME TOGGLE BUTTON
+   ========================================= */
+.theme-btn {
+    float: right;
+    background-color: var(--btn-bg);
+    color: var(--btn-text);
+    padding: 10px 15px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    cursor: pointer;
+    font-family: inherit;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.theme-btn:hover {
+    filter: brightness(1.2);
+    transform: translateY(-2px);
+}
+
+.theme-btn i {
+    margin-right: 6px;
+}
+
+/* =========================================
+   5. MAIN CONTAINER
+   ========================================= */
+main, header {
+    max-width: 900px;
+    margin: 0 auto;
+    background-color: var(--bg-color);
+    padding: 40px;
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border-radius: 8px;
+    position: relative;
+    transition: all 0.5s ease;
+}
+
+header {
+    border-bottom: none;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    padding-bottom: 0;
+}
+
+main {
+    border-top: none;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    margin-top: 0;
+}
+
+/* =========================================
+   6. TYPOGRAPHY, HEADERS & ICONS
+   ========================================= */
+h1 {
+    font-size: 2rem;
+    margin-bottom: 5px;
+    color: var(--text-color);
+}
+
+body:not(.cloud-theme) h1::before {
+    content: "[zahran@aws ~]$ ";
+    color: var(--accent-color);
+}
+
+.contact-line {
+    font-size: 0.95rem;
+    margin-bottom: 10px;
+    color: var(--text-color);
+    opacity: 0.9;
+}
+
+/* Standalone Social Icons Styling */
+.social-icons {
+    margin-bottom: 25px;
+}
+
+.social-icons a {
+    color: var(--text-color);
+    font-size: 1.6rem;
+    margin-right: 15px;
+    text-decoration: none;
+    display: inline-block;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.social-icons a:hover {
+    color: var(--prompt-color);
+    transform: scale(1.15); 
+}
+
+/* Global Icon Styling */
+i.fas, i.fab {
+    color: var(--prompt-color);
+    margin-right: 4px;
+}
+
+.social-icons a i {
+    color: inherit;
+    margin-right: 0;
+}
+
+h2 {
+    font-size: 1.2rem;
+    margin-top: 35px;
+    margin-bottom: 15px;
+    color: var(--prompt-color);
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 5px;
+}
+
+body:not(.cloud-theme) h2::before {
+    content: "cat ";
+    color: var(--text-color);
+}
+
+body:not(.cloud-theme) h2::after {
+    content: ".txt";
+    color: var(--text-color);
+}
+
+/* =========================================
+   7. EXPERIENCE & SKILLS
+   ========================================= */
+p, li {
+    font-size: 0.95rem;
+    margin-bottom: 10px;
+}
+
+ul {
+    list-style-type: none; 
+    padding-left: 20px;
+}
+
+body:not(.cloud-theme) ul li::before {
+    content: "> ";
+    color: var(--accent-color);
+    font-weight: bold;
+    display: inline-block;
+    width: 1.2em;
+    margin-left: -1.2em;
+}
+
+body.cloud-theme ul {
+    list-style-type: square;
+    color: var(--accent-color);
+}
+body.cloud-theme ul li {
+    color: var(--text-color);
+}
+
+.exp-item {
+    margin-bottom: 30px;
+    padding: 15px;
+    border-left: 3px solid var(--prompt-color);
+    background-color: rgba(0, 0, 0, 0.15);
+    border-radius: 0 6px 6px 0;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+}
+
+body.cloud-theme .exp-item:hover {
+    transform: var(--float-transform);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    background-color: rgba(255, 255, 255, 0.4);
+}
+
+.exp-header {
+    display: flex;
+    justify-content: space-between;
+    font-weight: bold;
+    color: var(--prompt-color);
+    margin-bottom: 10px;
+}
+
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 15px;
+}
+
+.skill-group {
+    border: 1px dashed var(--border-color);
+    padding: 15px;
+    border-radius: 4px;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+body.cloud-theme .skill-group:hover {
+    transform: var(--float-transform);
+    background-color: rgba(255, 255, 255, 0.5);
+    border: 1px solid var(--accent-color);
+}
+
+.skill-group h3 {
+    font-size: 0.9rem;
+    color: var(--prompt-color);
+    margin-bottom: 5px;
+}
+
+/* =========================================
+   8. SYSTEM STATUS & FOOTER
+   ========================================= */
+.counter-box {
+    border: 1px solid var(--border-color);
+    padding: 12px;
+    margin: 20px 0;
+    display: inline-block;
+    background: var(--counter-bg);
+    border-radius: 4px;
+    font-weight: bold;
+}
+
+.signature {
+    margin-top: 50px;
+    font-size: 1.2rem;
+    color: var(--text-color);
+}
+
+body:not(.cloud-theme) .signature::after {
+    content: "█";
+    animation: blink 1s step-end infinite;
+    color: var(--accent-color);
+}
+
+@keyframes blink {
+    from, to { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+footer {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 0.8rem;
+    opacity: 0.6;
+}
+
+/* =========================================
+   9. PRINT OPTIMIZATION (CLEAN CV)
+   ========================================= */
+@media print {
+    body {
+        background: white !important;
+        color: black !important;
+        padding: 0 !important;
+        font-family: 'Inter', 'Segoe UI', Arial, sans-serif !important;
+    }
+    
+    main, header {
+        box-shadow: none !important;
+        border: none !important;
+        max-width: 100% !important;
+        background: white !important;
+        padding: 0 !important;
+        backdrop-filter: none !important;
+    }
+    
+    .no-print {
+        display: none !important;
+    }
+    
+    .print-only {
+        display: inline !important;
+    }
+
+    h1, h2, h3, p, li, a, span, i.fas, i.fab {
+        color: black !important;
+    }
+    
+    h1 { margin-top: 0; padding-top: 0; }
+    
+    h1::before, h2::before, h2::after, ul li::before, .signature::after {
+        content: none !important;
+    }
+    
+    ul { 
+        list-style-type: disc !important; 
+        padding-left: 20px !important; 
+    }
+    
+    .exp-item { 
+        border-left: none !important; 
+        background: transparent !important; 
+        padding-left: 0 !important; 
+        margin-bottom: 20px !important; 
+    }
+    
+    .skill-group { 
+        border: none !important; 
+        padding: 0 !important; 
+        margin-bottom: 15px !important; 
+    }
+    
+    .skills-grid { 
+        display: block !important; 
+    }
+    
+    .contact-line { 
+        opacity: 1 !important; 
+        margin-bottom: 25px !important; 
+        line-height: 1.5 !important;
+    }
+}
+
+/* =========================================
    10. ANIMATIONS (Scroll Reveal)
    ========================================= */
 
