@@ -1,24 +1,26 @@
-/*   1. SYSADMIN PURE VARIABLES (Default) */
+/* =========================================
+   1. MODERN TERMINAL VARIABLES (Default)
+   ========================================= */
 :root {
-    --page-bg: #1e1e1e;           
-    --bg-color: #2c2c2c;          
-    --text-color: #8fbc8f;        
-    --prompt-color: #cc0000;      
-    --accent-color: #555555;      
-    --border-color: #444444;
-    --font-mono: 'Courier New', Courier, monospace;
-    --counter-bg: #111111;
-    --btn-bg: #444444;
-    --btn-text: #ffffff;
+    --page-bg: #1a1b26;           /* Deep soft slate blue */
+    --bg-color: #24283b;          /* Slightly lighter container */
+    --text-color: #c0caf5;        /* Soft lavender-white for less eye strain */
+    --prompt-color: #7aa2f7;      /* Pastel blue for headers/prompts */
+    --accent-color: #9ece6a;      /* Soft pastel green for list accents */
+    --border-color: #414868;      /* Muted borders */
+    --font-mono: 'Fira Code', 'Courier New', Courier, monospace;
+    --counter-bg: #16161e;
+    --btn-bg: #3d59a1;
+    --btn-text: #c0caf5;
     
     --glass-blur: blur(0px);
-    --shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    --shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
     --float-transform: translateY(0);
 }
 
-/* 
+/* =========================================
    2. FLOATING CLOUD VARIABLES (Toggled)
- */
+   ========================================= */
 body.cloud-theme {
     background: linear-gradient(-45deg, #ff990033, #6b5b9533, #ffffff, #e6f7ff);
     background-size: 400% 400%;
@@ -46,9 +48,9 @@ body.cloud-theme {
     100% { background-position: 0% 50%; }
 }
 
-/* 
+/* =========================================
    3. GLOBAL RESET & BODY
-*/
+   ========================================= */
 * {
     margin: 0;
     padding: 0;
@@ -69,9 +71,9 @@ body {
     display: none;
 }
 
-/* 
+/* =========================================
    4. THEME TOGGLE BUTTON
-*/
+   ========================================= */
 .theme-btn {
     float: right;
     background-color: var(--btn-bg);
@@ -87,7 +89,7 @@ body {
 }
 
 .theme-btn:hover {
-    filter: brightness(1.1);
+    filter: brightness(1.2);
     transform: translateY(-2px);
 }
 
@@ -95,9 +97,9 @@ body {
     margin-right: 6px;
 }
 
-/* 
+/* =========================================
    5. MAIN CONTAINER
-*/
+   ========================================= */
 main, header {
     max-width: 900px;
     margin: 0 auto;
@@ -126,9 +128,9 @@ main {
     margin-top: 0;
 }
 
-/* 
+/* =========================================
    6. TYPOGRAPHY, HEADERS & ICONS
-*/
+   ========================================= */
 h1 {
     font-size: 2rem;
     margin-bottom: 5px;
@@ -136,8 +138,8 @@ h1 {
 }
 
 body:not(.cloud-theme) h1::before {
-    content: "[root@localhost ~]# ";
-    color: var(--prompt-color);
+    content: "[zahran@aws ~]$ ";
+    color: var(--accent-color);
 }
 
 .contact-line {
@@ -196,9 +198,9 @@ body:not(.cloud-theme) h2::after {
     color: var(--text-color);
 }
 
-/* 
+/* =========================================
    7. EXPERIENCE & SKILLS
-*/
+   ========================================= */
 p, li {
     font-size: 0.95rem;
     margin-bottom: 10px;
@@ -210,8 +212,8 @@ ul {
 }
 
 body:not(.cloud-theme) ul li::before {
-    content: "$ ";
-    color: var(--prompt-color);
+    content: "> ";
+    color: var(--accent-color);
     font-weight: bold;
     display: inline-block;
     width: 1.2em;
@@ -230,7 +232,7 @@ body.cloud-theme ul li {
     margin-bottom: 30px;
     padding: 15px;
     border-left: 3px solid var(--prompt-color);
-    background-color: rgba(0, 0, 0, 0.05);
+    background-color: rgba(0, 0, 0, 0.15);
     border-radius: 0 6px 6px 0;
     transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
 }
@@ -274,9 +276,9 @@ body.cloud-theme .skill-group:hover {
     margin-bottom: 5px;
 }
 
-/* 
+/* =========================================
    8. SYSTEM STATUS & FOOTER
-*/
+   ========================================= */
 .counter-box {
     border: 1px solid var(--border-color);
     padding: 12px;
@@ -296,7 +298,7 @@ body.cloud-theme .skill-group:hover {
 body:not(.cloud-theme) .signature::after {
     content: "█";
     animation: blink 1s step-end infinite;
-    color: var(--prompt-color);
+    color: var(--accent-color);
 }
 
 @keyframes blink {
@@ -311,11 +313,10 @@ footer {
     opacity: 0.6;
 }
 
-/*
+/* =========================================
    9. PRINT OPTIMIZATION (CLEAN CV)
-*/
+   ========================================= */
 @media print {
-    /* Force white background and black text */
     body {
         background: white !important;
         color: black !important;
@@ -323,7 +324,6 @@ footer {
         font-family: 'Inter', 'Segoe UI', Arial, sans-serif !important;
     }
     
-    /* Remove borders, shadows, and glass effects */
     main, header {
         box-shadow: none !important;
         border: none !important;
@@ -333,35 +333,29 @@ footer {
         backdrop-filter: none !important;
     }
     
-    /* Hide all web-only UI elements */
     .no-print {
         display: none !important;
     }
     
-    /* Reveal full text URLs for paper */
     .print-only {
         display: inline !important;
     }
 
-    /* Force all text and icons to black */
     h1, h2, h3, p, li, a, span, i.fas, i.fab {
         color: black !important;
     }
     
     h1 { margin-top: 0; padding-top: 0; }
     
-    /* Strip away Terminal pseudo-elements */
     h1::before, h2::before, h2::after, ul li::before, .signature::after {
         content: none !important;
     }
     
-    /* Format lists as standard bullets */
     ul { 
         list-style-type: disc !important; 
         padding-left: 20px !important; 
     }
     
-    /* Clean up layout blocks */
     .exp-item { 
         border-left: none !important; 
         background: transparent !important; 
