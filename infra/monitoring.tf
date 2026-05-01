@@ -14,5 +14,15 @@ resource "aws_cloudwatch_metric_alarm" "lambda_error_alarm" {
     FunctionName = aws_lambda_function.visitor_counter_lambda.function_name
   }
 
-  # alarm_actions = [aws_sns_topic.my_alerts.arn]
+  alarm_actions = [aws_sns_topic.my_alerts.arn]
+}
+
+resource "aws_sns_topic" "alarm_notifications" {
+  name = "lambda-error-alerts"
+}
+
+resource "aws_sns_topic_subscription" "email_target" {
+  topic_arn = aws_sns_topic.alarm_notifications.arn
+  protocol  = "email"
+  endpoint  = "ahmedzahran851@gmail.com"
 }
