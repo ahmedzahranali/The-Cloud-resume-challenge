@@ -4,72 +4,158 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ahmed Zahran | Cloud DevOps Engineer</title>
+    <meta name="description" content="Ahmed Zahran Ali — AWS Certified Cloud DevOps Engineer specializing in Terraform, Kubernetes, and zero-trust CI/CD automation. View experience, projects, and certifications.">
+    <meta property="og:title" content="Ahmed Zahran Ali | Cloud DevOps Engineer">
+    <meta property="og:description" content="AWS Certified Cloud DevOps Engineer specializing in Terraform, Kubernetes, and zero-trust CI/CD automation.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://mydevopsresume.com">
+    <meta name="twitter:card" content="summary">
+    <meta name="theme-color" content="#060810">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<header>
-    <button id="theme-toggle" class="theme-btn no-print"><i class="fas fa-cloud"></i> Switch to Cloud Theme</button>
-    <h1>Ahmed Zahran Ali</h1>
-    
-    <p class="contact-line">
-        <i class="fas fa-map-marker-alt"></i> Hadayek Elmaadi, Cairo, Egypt 
-        <span class="print-only">
-            <br>
-            <i class="fas fa-envelope"></i> ahmedzahran851@gmail.com | 
-            <i class="fab fa-linkedin"></i> linkedin.com/in/ahmed-zahran-b0a054393 | 
-            <i class="fab fa-github"></i> github.com/ahmedzahranali
-        </span>
-    </p>
-    
-    <div class="social-icons no-print">
-        <a href="mailto:ahmedzahran851@gmail.com" title="Email"><i class="fas fa-envelope"></i></a>
-        <a href="https://www.linkedin.com/in/ahmed-zahran-b0a054393" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
-        <a href="https://github.com/ahmedzahranali" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
-    </div>
+<!-- Site-wide living background: soft color blobs drifting behind everything -->
+<div class="aurora-layer" aria-hidden="true">
+    <span class="blob blob-1"></span>
+    <span class="blob blob-2"></span>
+    <span class="blob blob-3"></span>
+    <span class="blob blob-4"></span>
+    <span class="blob blob-5"></span>
+</div>
 
-    <div class="counter-box no-print">
-        <p><i class="fas fa-chart-line"></i> Visitor Count: <span id="counter">Loading...</span></p>
+<div id="scroll-progress" class="no-print" aria-hidden="true"></div>
+
+<header class="topbar no-print">
+    <div class="topbar-inner glass">
+        <a href="#hero" class="brand" aria-label="Back to top">AZ<span class="brand-dot">.</span></a>
+
+        <nav class="quick-nav" aria-label="Section navigation">
+            <a href="#summary">Summary</a>
+            <a href="#skills">Skills</a>
+            <a href="#certifications">Certs</a>
+            <a href="#experience">Experience</a>
+            <a href="#projects">Projects</a>
+            <a href="#education">Education</a>
+        </nav>
+
+        <div class="topbar-actions">
+            <span class="status-pill" title="Live visitor count">
+                <span class="status-dot"></span>
+                <span id="counter">…</span> visits
+            </span>
+            <button id="motion-toggle" class="icon-btn" type="button" aria-pressed="false" title="Pause background motion">
+                <i class="fas fa-pause"></i>
+            </button>
+            <button id="print-btn" class="icon-btn" type="button" title="Print or save as PDF">
+                <i class="fas fa-print"></i>
+            </button>
+        </div>
     </div>
 </header>
 
 <main>
-    <section id="summary" class="fade-in-section">
-        <h2>Professional Summary</h2>
-        <p>Emerging Cloud DevOps Engineer with a Bachelor's degree in Information Technology and hands-on expertise in cloud-native infrastructure. Fluent in English (C1 level) and proficient in orchestrating scalable environments using Terraform, Kubernetes, and Docker. Strong technical foundation in AWS serverless architectures, Linux system administration, and CI/CD automation. Proven ability to engineer zero-trust deployment pipelines, implement Infrastructure as Code (IaC), and establish proactive observability to optimize and secure cloud operations.</p>
+    <section id="hero" class="hero-section">
+        <div class="glass hero-card fade-in-section">
+            <p class="cmd-line" aria-hidden="true">visitor@mydevopsresume:~$ whoami</p>
+            <h1>Ahmed Zahran Ali</h1>
+            <p class="tagline"><span id="typewriter-text"></span><span class="type-caret" aria-hidden="true">|</span></p>
+
+            <p class="contact-line">
+                <i class="fas fa-map-marker-alt"></i> Hadayek Elmaadi, Cairo, Egypt
+                <span class="print-only">
+                    <br>
+                    <i class="fas fa-envelope"></i> ahmedzahran851@gmail.com |
+                    <i class="fab fa-linkedin"></i> linkedin.com/in/ahmed-zahran-b0a054393 |
+                    <i class="fab fa-github"></i> github.com/ahmedzahranali
+                </span>
+            </p>
+
+            <div class="social-icons no-print">
+                <a href="mailto:ahmedzahran851@gmail.com" title="Email"><i class="fas fa-envelope"></i></a>
+                <a href="https://www.linkedin.com/in/ahmed-zahran-b0a054393" target="_blank" rel="noopener" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                <a href="https://github.com/ahmedzahranali" target="_blank" rel="noopener" title="GitHub"><i class="fab fa-github"></i></a>
+            </div>
+        </div>
     </section>
 
-    <section id="skills" class="fade-in-section">
+    <section id="summary" class="content-section fade-in-section">
+        <p class="cmd-line" aria-hidden="true">~$ cat about.md</p>
+        <h2>Professional Summary</h2>
+        <div class="glass panel">
+            <p>Emerging Cloud DevOps Engineer with a Bachelor's degree in Information Technology and hands-on expertise in cloud-native infrastructure. Fluent in English (C1 level) and proficient in orchestrating scalable environments using Terraform, Kubernetes, and Docker. Strong technical foundation in AWS serverless architectures, Linux system administration, and CI/CD automation. Proven ability to engineer zero-trust deployment pipelines, implement Infrastructure as Code (IaC), and establish proactive observability to optimize and secure cloud operations.</p>
+        </div>
+    </section>
+
+    <section id="skills" class="content-section fade-in-section">
+        <p class="cmd-line" aria-hidden="true">~$ terraform state list</p>
         <h2>Technical Skills</h2>
         <div class="skills-grid">
-            <div class="skill-group">
+            <div class="skill-group glass">
                 <h3><i class="fas fa-server"></i> Cloud & Architecture</h3>
                 <p>AWS (S3, Lambda, CloudFront, IAM, CloudWatch, SNS), Serverless Architecture</p>
             </div>
-            <div class="skill-group">
+            <div class="skill-group glass">
                 <h3><i class="fas fa-code-branch"></i> Automation & CI/CD</h3>
                 <p>Terraform, GitHub Actions, Ansible, Python, Shell Scripting, Git</p>
             </div>
-            <div class="skill-group">
+            <div class="skill-group glass">
                 <h3><i class="fab fa-linux"></i> OS & Security</h3>
                 <p>Linux Administration (Red Hat Admin I/II, SELinux, LVM), Zero-Trust Security (OIDC)</p>
             </div>
-            <div class="skill-group">
+            <div class="skill-group glass">
                 <h3><i class="fas fa-cubes"></i> Containerization</h3>
                 <p>Kubernetes, Docker, Red Hat OpenShift</p>
             </div>
-            <div class="skill-group">
+            <div class="skill-group glass">
                 <h3><i class="fas fa-network-wired"></i> Networking & Languages</h3>
                 <p>VLANs, SNMP, Cisco, English (Fluent / C1), Arabic (Native)</p>
             </div>
         </div>
     </section>
 
-    <section id="experience" class="fade-in-section">
+    <section id="certifications" class="content-section fade-in-section">
+        <p class="cmd-line" aria-hidden="true">~$ aws sts get-caller-identity</p>
+        <h2>Certifications</h2>
+        <div class="skills-grid certs-grid">
+            <div class="skill-group cert-card glass">
+                <div class="cert-head">
+                    <i class="fab fa-aws"></i>
+                    <h3>AWS Certified Solutions Architect – Associate</h3>
+                </div>
+                <p class="cert-meta">Amazon Web Services &middot; Issued June 2026 &middot; Expires June 2029</p>
+                <p class="cert-id">Validation #: 81aeec1e62c04c8dbc86fa7e9172dd43</p>
+                <a href="https://aws.amazon.com/verification" target="_blank" rel="noopener" class="cert-link no-print">
+                    <i class="fas fa-arrow-up-right-from-square"></i> Verify Credential
+                </a>
+                <span class="print-only cert-print-link">Verify at aws.amazon.com/verification with validation #81aeec1e62c04c8dbc86fa7e9172dd43</span>
+            </div>
+
+            <div class="skill-group cert-card glass">
+                <div class="cert-head">
+                    <i class="fab fa-aws"></i>
+                    <h3>AWS Certified Cloud Practitioner</h3>
+                </div>
+                <p class="cert-meta">Amazon Web Services &middot; Issued June 2026 &middot; Expires June 2029</p>
+                <p class="cert-id">Validation #: 4294d0b1326240c3907674b5731e2d90</p>
+                <a href="https://aws.amazon.com/verification" target="_blank" rel="noopener" class="cert-link no-print">
+                    <i class="fas fa-arrow-up-right-from-square"></i> Verify Credential
+                </a>
+                <span class="print-only cert-print-link">Verify at aws.amazon.com/verification with validation #4294d0b1326240c3907674b5731e2d90</span>
+            </div>
+        </div>
+    </section>
+
+    <section id="experience" class="content-section fade-in-section">
+        <p class="cmd-line" aria-hidden="true">~$ git log --oneline</p>
         <h2>Professional Experience</h2>
-        
-        <article class="exp-item">
+
+        <article class="exp-item glass">
             <div class="exp-header">
                 <h3>Cloud DevOps Intern</h3>
                 <span>iVolve</span>
@@ -83,7 +169,7 @@
             </ul>
         </article>
 
-        <article class="exp-item">
+        <article class="exp-item glass">
             <div class="exp-header">
                 <h3>Network DevOps Engineer Scholarship</h3>
                 <span>National Telecommunication Institute (NTI)</span>
@@ -97,10 +183,11 @@
         </article>
     </section>
 
-    <section id="projects" class="fade-in-section">
+    <section id="projects" class="content-section fade-in-section">
+        <p class="cmd-line" aria-hidden="true">~$ kubectl get deployments</p>
         <h2>Technical Projects</h2>
-        
-        <article class="exp-item">
+
+        <article class="exp-item glass">
             <div class="exp-header">
                 <h3>Cloud Resume Challenge</h3>
                 <span>Serverless AWS Architecture & CI/CD</span>
@@ -114,36 +201,11 @@
         </article>
     </section>
 
-    <section id="certifications" class="fade-in-section">
-        <h2>Certifications</h2>
-        
-        <article class="exp-item">
-            <div class="exp-header">
-                <h3><i class="fab fa-aws"></i> AWS Certified Solutions Architect - Associate</h3>
-                <span>June 2026 - June 2029</span>
-            </div>
-            <ul>
-                <li><strong>Validation Number:</strong> 81aeec1e62c04c8dbc86fa7e9172dd43</li>
-                <li><strong>Validate at:</strong> <a href="https://aws.amazon.com/verification" target="_blank" style="color: inherit;">aws.amazon.com/verification</a></li>
-            </ul>
-        </article>
-
-        <article class="exp-item">
-            <div class="exp-header">
-                <h3><i class="fab fa-aws"></i> AWS Certified Cloud Practitioner</h3>
-                <span>June 2026 - June 2029</span>
-            </div>
-            <ul>
-                <li><strong>Validation Number:</strong> 4294d0b1326240c3907674b5731e2d90</li>
-                <li><strong>Validate at:</strong> <a href="https://aws.amazon.com/verification" target="_blank" style="color: inherit;">aws.amazon.com/verification</a></li>
-            </ul>
-        </article>
-    </section>
-
-    <section id="other-experience" class="fade-in-section">
+    <section id="other-experience" class="content-section fade-in-section">
+        <p class="cmd-line" aria-hidden="true">~$ history | tail</p>
         <h2>Other Experience</h2>
-        
-        <article class="exp-item">
+
+        <article class="exp-item glass">
             <div class="exp-header">
                 <h3>Customer Service Agent</h3>
                 <span>TTEC & Concentrix – Cairo, Egypt</span>
@@ -154,7 +216,7 @@
             </ul>
         </article>
 
-        <article class="exp-item">
+        <article class="exp-item glass">
             <div class="exp-header">
                 <h3>Front-End Web Development</h3>
                 <span>Route Academy – Cairo, Egypt</span>
@@ -166,14 +228,17 @@
         </article>
     </section>
 
-    <section id="education" class="fade-in-section">
+    <section id="education" class="content-section fade-in-section">
+        <p class="cmd-line" aria-hidden="true">~$ cat education.log</p>
         <h2>Education</h2>
-        <p><strong>Bachelor of Information Technology</strong><br>
-        Faculty of Computers and Artificial Intelligence, Beni-suef, Egypt | Graduation: 2022</p>
+        <div class="glass panel">
+            <p><strong>Bachelor of Information Technology</strong><br>
+            Faculty of Computers and Artificial Intelligence, Beni-suef, Egypt | Graduation: 2022</p>
+        </div>
     </section>
 
     <div class="signature no-print">
-        <p>logout</p>
+        <p>[ logout ]</p>
         <p>Ahmed Zahran</p>
     </div>
 </main>
