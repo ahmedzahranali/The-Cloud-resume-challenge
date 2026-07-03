@@ -9,6 +9,10 @@ test('Portfolio Quality Gate: Critical UI Elements Load', async ({ page }) => {
 
     // Assertions
     await expect(page).toHaveTitle(/Ahmed Zahran/);
-    await expect(page.locator('#theme-toggle')).toBeVisible();
+    
+    // Check for the actual buttons in your top bar instead of theme-toggle
+    await expect(page.locator('#motion-toggle')).toBeVisible();
+    await expect(page.locator('#print-btn')).toBeVisible();
+    
     await expect(page.locator('#counter')).toBeVisible();
 });

@@ -176,7 +176,7 @@ if (printBtn) {
 
 // --- 7. Subtle cursor-reactive drift on the background blobs ---
 if (!prefersReducedMotion && window.matchMedia('(hover: hover)').matches) {
-    const blobs = document.querySelectorAll('.blob');
+    const auroraLayer = document.querySelector('.aurora-layer');
     let mouseX = 0.5;
     let mouseY = 0.5;
     let rafPending = false;
@@ -188,13 +188,12 @@ if (!prefersReducedMotion && window.matchMedia('(hover: hover)').matches) {
         if (!rafPending) {
             rafPending = true;
             requestAnimationFrame(() => {
-                blobs.forEach((blob, i) => {
-                    const strength = 18 + i * 4; // px of parallax travel
-                    const dx = (mouseX - 0.5) * strength;
-                    const dy = (mouseY - 0.5) * strength;
-                    blob.style.marginLeft = `${dx}px`;
-                    blob.style.marginTop = `${dy}px`;
-                });
+                // Move the entire background layer slightly instead of individual blobs
+                const dx = (mouseX - 0.5) * 40; // Max 40px travel
+                const dy = (mouseY - 0.5) * 40;
+                
+                // transform is hardware-accelerated and won't trigger layout recalculations
+                auroraLayer.style.transform = `translate(${dx}px, ${dy}px)`;
                 rafPending = false;
             });
         }
