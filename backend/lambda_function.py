@@ -9,9 +9,9 @@ def lambda_handler(event, context):
     # Atomic update: Increments the 'count' attribute for the 'visitors' ID
     response = table.update_item(
         Key={'id': 'visitors'},
-        UpdateExpression='SET #c = #c + :val',
+        UpdateExpression='SET #c = if_not_exists(#c, :zero) + :val',
         ExpressionAttributeNames={'#c': 'count'},
-        ExpressionAttributeValues={':val': 1},
+        ExpressionAttributeValues={':val': 1, ':zero': 0},
         ReturnValues='UPDATED_NEW'
     )
     

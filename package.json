@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "playwright test",
+    "test:backend": "python -m pytest backend",
+    "test:ui": "playwright test --ui"
   },
   "repository": {
     "type": "git",

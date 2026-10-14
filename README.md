@@ -1,80 +1,78 @@
-# The-Cloud-resume-challenge
+# Cloud Resume Challenge
 
-This project is a high-availability, globally distributed professional portfolio designed to showcase cloud-native engineering skills. It features a dual-theme frontend, a serverless backend for visitor tracking, and a robust automation pipeline that ensures production stability through End-to-End (E2E) testing.
-## Key Features
+Ahmed Zahran Ali's portfolio combines a static HTML/CSS/JavaScript frontend with a Python AWS Lambda visitor counter backed by DynamoDB.
 
-    Dual-Theme Interface: A professional UI featuring a "Tokyo Night" inspired Terminal theme for a low-eye-strain developer look and a modern "Floating Cloud" theme for a corporate aesthetic.
+## Website
 
-    Live Visitor Counter: A serverless integration using AWS Lambda and DynamoDB to track and display real-time site traffic.
+https://mydevopsresume.com
 
-    Quality Gate Automation: A CI/CD pipeline that blocks broken code from reaching production by running headless browser tests on every commit.
+The frontend includes a dark aurora background, section navigation, a persistent background-motion preference, reduced-motion support, certification details, and a print layout. It uses system fonts without requiring local font downloads.
 
-    Zero-Trust Deployment: Secure, secret-less authentication between GitHub Actions and AWS using OpenID Connect (OIDC).
+## Architecture and infrastructure coverage
 
-    Professional Summary: Highlights a candidate for Junior Site Reliability Engineer (SRE) and DevOps roles with C1 English proficiency.
+The website uses S3 and CloudFront for delivery. The frontend sends visitor-counter requests to API Gateway, which invokes Lambda and updates DynamoDB atomically.
 
-## Technical Architecture
+Terraform in this repository defines:
 
-The architecture follows AWS best practices for scalability, security, and cost-efficiency:
+- The frontend S3 bucket in `us-east-2`.
+- Lambda, its execution role and DynamoDB table in `us-east-1`.
+- A Lambda error alarm, SNS topic and email subscription in `us-east-1`.
+- An encrypted S3 remote-state backend with state locking in `us-east-2`.
 
-    Frontend Hosting: Static assets (HTML, CSS, JS) are hosted in an Amazon S3 bucket and served globally via Amazon CloudFront for low-latency delivery.
+CloudFront, API Gateway, DNS/TLS, the GitHub OIDC provider and deployment role, the remote-state bucket, and the referenced Lambda logging policy are external prerequisites; they are not provisioned by the checked-in Terraform. This repository alone does not recreate the entire deployed environment.
 
-    Serverless API: A JavaScript-based visitor counter triggers an AWS Lambda function via API Gateway.
+## Repository layout
 
-    Database: Amazon DynamoDB serves as a NoSQL data store to maintain the visitor count with high availability.
+| Directory | Purpose |
+|---|---|
+| `frontend/` | Portfolio HTML, CSS and JavaScript |
+| `backend/` | Python Lambda handler and mocked DynamoDB tests |
+| `infra/` | Terraform resource definitions |
+| `tests/` | Playwright browser tests |
+| `.github/workflows/` | Validation and deployment workflows |
 
-    Observability: Proactive monitoring is established using Amazon CloudWatch alarms and SNS notifications to alert on system errors or billing thresholds.
+## Local checks
 
-    Infrastructure as Code (IaC): All cloud resources are provisioned and managed using Terraform to ensure environment consistency and repeatability.
+Use Python 3.12, Node.js 20 and Terraform 1.10 or newer (required for S3 lockfiles).
 
-## Project Structure
+```sh
+python -m venv .venv
+. .venv/bin/activate
+pip install pytest moto boto3
+(cd backend && python -m pytest)
+npm ci
+npx playwright install --with-deps chromium
+npm test
+(cd infra && terraform init -backend=false && terraform fmt -check && terraform validate)
+```
 
-The repository is organized into distinct sub-directories to maintain a clear separation of concerns, reflecting a production-grade DevOps environment:
-Plaintext
+Playwright starts a local HTTP server and tests desktop and mobile layouts. The visitor API is mocked so tests do not modify the production counter. Checks cover counter success and failure, motion preference persistence, critical content, viewport overflow, and printing. Backend tests cover an empty database and existing counts.
 
-.
-├── .github/workflows/   # CI/CD pipeline definitions (GitHub Actions)
-├── backend/             # Serverless logic (Python/Node.js) and DB schemas
-├── frontend/            # Web assets (index.html, style.css, main.js)
-├── infra/               # Infrastructure as Code (Terraform)
-├── tests/               # Playwright End-to-End (E2E) test scripts
-├── .gitignore           # Optimized to exclude node_modules and local artifacts
-├── package.json         # Root configuration for the automated testing suite
-└── README.md            # Project documentation
+To browse locally:
 
-## CI/CD Pipeline & Quality Gate
+```sh
+python3 -m http.server 8000 --directory frontend
+```
 
-The project utilizes GitHub Actions to automate the entire lifecycle. The pipeline is divided into two mandatory stages:
-### 1. The Quality Gate (Testing)
+Open http://localhost:8000. Browsing manually uses the real visitor API.
 
-Before any code is deployed, the pipeline initializes a Linux runner to:
+## CI/CD
 
-    Install project dependencies and Playwright browser binaries.
+Pull requests to `main` run backend tests, Terraform formatting/validation, and Playwright checks. Pushes to `main` run the same checks and deploy only after all quality gates pass.
 
-    Execute E2E tests against the frontend/ directory.
+Deployment authenticates through AWS OIDC, applies Terraform, syncs frontend assets to S3, invalidates CloudFront, then packages and updates Lambda. Configure `AWS_S3_BUCKET` and `CLOUDFRONT_DISTRIBUTION_ID` as GitHub Actions secrets and ensure the deployment role trusts the appropriate repository and branch.
 
-    Verify that critical UI elements (e.g., the visitor counter and theme toggle) are present and functional.
+Lambda code is deployed by the workflow rather than Terraform. Its Terraform resource ignores package changes and references `function.zip`; a fresh environment requires a valid package at the Terraform working directory before creation. The existing workflow is oriented toward an already provisioned environment.
 
-    Capture Evidence: On failure, the pipeline automatically uploads screenshots and videos as artifacts for rapid Root Cause Analysis (RCA).
+Changing the monitoring resources from Ohio to N. Virginia may recreate the alarm and SNS resources. Review the Terraform plan before merging; the new SNS email subscription will require confirmation.
 
-### 2. The Deployment
+## About
 
-Only if the Quality Gate passes, the pipeline proceeds to:
+Ahmed Zahran Ali is an AWS Certified Solutions Architect – Associate and AWS Certified Cloud Practitioner focused on DevOps, Linux, Kubernetes and OpenShift.
 
-    Assume an IAM Role via OIDC (Zero-Trust).
+## Next improvements
 
-    Sync the frontend/ directory to the production S3 bucket.
-
-    Invalidate the CloudFront cache to ensure immediate global updates.
-
-## Future Roadmap
-
-    Containerization: Develop a Dockerfile for the frontend to explore portability with Kubernetes (K8s) or OpenShift.
-
-    Advanced WAF Rules: Implement AWS Web Application Firewall (WAF) to add rate limiting and bot protection.
-
-    Enhanced Observability: Build a custom CloudWatch dashboard to visualize Lambda execution times and error rates in real-time.
-
-## About the Author
-
-Ahmed Zahran is an emerging Cloud DevOps Engineer and Junior SRE candidate with a strong technical foundation in AWS, Linux Administration, and CI/CD automation. Currently pursuing AWS Certified Solutions Architect Associate and Certified Kubernetes Administrator (CKA) certifications to deepen expertise in orchestrating scalable, resilient cloud infrastructures.
+- Bring CloudFront, API Gateway, OIDC and remaining prerequisites under Terraform.
+- Package Lambda reproducibly before Terraform and remove account-specific policy dependencies.
+- Add documented OpenShift lab projects, architecture diagrams and project links.
+- Add API rate limiting and expand operational dashboards.
