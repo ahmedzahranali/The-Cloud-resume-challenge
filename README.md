@@ -16,7 +16,7 @@ Terraform in this repository defines:
 
 - The frontend S3 bucket in `us-east-2`.
 - Lambda, its execution role and DynamoDB table in `us-east-1`.
-- A Lambda error alarm, SNS topic and email subscription in `us-east-1`.
+- New Lambda error monitoring and SNS email notifications in `us-east-1`, with legacy `us-east-2` monitoring retained during migration.
 - An encrypted S3 remote-state backend with state locking in `us-east-2`.
 
 CloudFront, API Gateway, DNS/TLS, the GitHub OIDC provider and deployment role, the remote-state bucket, and the referenced Lambda logging policy are external prerequisites; they are not provisioned by the checked-in Terraform. This repository alone does not recreate the entire deployed environment.
@@ -64,7 +64,7 @@ Deployment authenticates through AWS OIDC, applies Terraform, syncs frontend ass
 
 Lambda code is deployed by the workflow rather than Terraform. Its Terraform resource ignores package changes and references `function.zip`; a fresh environment requires a valid package at the Terraform working directory before creation. The existing workflow is oriented toward an already provisioned environment.
 
-Changing the monitoring resources from Ohio to N. Virginia may recreate the alarm and SNS resources. Review the Terraform plan before merging; the new SNS email subscription will require confirmation.
+Monitoring migration preserves the original resource addresses on the default Ohio provider and creates separate alarm, topic and subscription resources in N. Virginia. Review the Terraform plan: existing Ohio monitoring should remain, with three new Virginia monitoring resources added. Confirm the new SNS email subscription, then verify Virginia alerts before retiring Ohio monitoring in a separate change. No state removal or manual resource deletion is needed for this migration.
 
 ## About
 
