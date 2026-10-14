@@ -1,63 +1,4 @@
-/* =========================================
-   0. SELF-HOSTED FONTS
-   ========================================= */
-@font-face {
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 400;
-    font-display: swap;
-    src: url('./fonts/inter-v12-latin-regular.woff2') format('woff2');
-}
-@font-face {
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 500;
-    font-display: swap;
-    src: url('./fonts/inter-v12-latin-500.woff2') format('woff2');
-}
-@font-face {
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 600;
-    font-display: swap;
-    src: url('./fonts/inter-v12-latin-600.woff2') format('woff2');
-}
-@font-face {
-    font-family: 'Space Grotesk';
-    font-style: normal;
-    font-weight: 500;
-    font-display: swap;
-    src: url('./fonts/space-grotesk-v15-latin-500.woff2') format('woff2');
-}
-@font-face {
-    font-family: 'Space Grotesk';
-    font-style: normal;
-    font-weight: 700;
-    font-display: swap;
-    src: url('./fonts/space-grotesk-v15-latin-700.woff2') format('woff2');
-}
-@font-face {
-    font-family: 'JetBrains Mono';
-    font-style: normal;
-    font-weight: 400;
-    font-display: swap;
-    src: url('./fonts/jetbrains-mono-v18-latin-regular.woff2') format('woff2');
-}
-@font-face {
-    font-family: 'JetBrains Mono';
-    font-style: normal;
-    font-weight: 500;
-    font-display: swap;
-    src: url('./fonts/jetbrains-mono-v18-latin-500.woff2') format('woff2');
-}
-@font-face {
-    font-family: 'JetBrains Mono';
-    font-style: normal;
-    font-weight: 600;
-    font-display: swap;
-    src: url('./fonts/jetbrains-mono-v18-latin-600.woff2') format('woff2');
-}
-
+/* System fonts keep the site self-contained without missing font assets. */
 /* =========================================
    1. DESIGN TOKENS
    ========================================= */
@@ -84,9 +25,9 @@
     --btn-text: #1a1200;
 
     /* Type */
-    --font-display: 'Space Grotesk', 'Segoe UI', sans-serif;
-    --font-body: 'Inter', 'Segoe UI', sans-serif;
-    --font-mono: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+    --font-display: 'Segoe UI', Arial, sans-serif;
+    --font-body: 'Segoe UI', Arial, sans-serif;
+    --font-mono: Consolas, 'Liberation Mono', 'Courier New', monospace;
 
     --shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
 }
@@ -690,7 +631,7 @@ footer {
     body {
         background: white !important;
         color: black !important;
-        font-family: 'Inter', 'Segoe UI', Arial, sans-serif !important;
+        font-family: 'Segoe UI', Arial, sans-serif !important;
     }
 
     .glass {

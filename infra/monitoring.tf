@@ -1,4 +1,5 @@
 resource "aws_cloudwatch_metric_alarm" "lambda_error_alarm" {
+  provider            = aws.us_east_1
   alarm_name          = "visitor-counter-lambda-errors"
   comparison_operator = "GreaterThanOrEqualToThreshold"
   evaluation_periods  = 1
@@ -18,10 +19,12 @@ resource "aws_cloudwatch_metric_alarm" "lambda_error_alarm" {
 }
 
 resource "aws_sns_topic" "alarm_notifications" {
-  name = "lambda-error-alerts"
+  provider = aws.us_east_1
+  name     = "lambda-error-alerts"
 }
 
 resource "aws_sns_topic_subscription" "email_target" {
+  provider  = aws.us_east_1
   topic_arn = aws_sns_topic.alarm_notifications.arn
   protocol  = "email"
   endpoint  = "ahmedzahran851@gmail.com"

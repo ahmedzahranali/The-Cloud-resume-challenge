@@ -1,14 +1,20 @@
-// playwright.config.js
-const { defineConfig } = require('@playwright/test');
+const { defineConfig, devices } = require('@playwright/test');
 
 module.exports = defineConfig({
   testDir: './tests',
   use: {
-    /* Capture screenshot after each test failure. */
+    baseURL: 'http://127.0.0.1:8000',
     screenshot: 'only-on-failure',
-    /* You can also record video on failure for deeper debugging */
     video: 'retain-on-failure',
   },
-  /* Reporter to use. 'html' generates a nice folder with all results */
+  projects: [
+    { name: 'desktop', use: { ...devices['Desktop Chrome'] } },
+    { name: 'mobile', use: { ...devices['iPhone 13'], defaultBrowserType: 'chromium' } },
+  ],
+  webServer: {
+    command: 'python3 -m http.server 8000 --bind 127.0.0.1 --directory frontend',
+    url: 'http://127.0.0.1:8000',
+    reuseExistingServer: !process.env.CI,
+  },
   reporter: 'html',
 });
